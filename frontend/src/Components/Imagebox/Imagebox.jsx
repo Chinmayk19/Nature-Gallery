@@ -91,7 +91,7 @@ const isFav = user && user.favourite.some(item => item.image === props.image && 
     const imguser=user;
     if (like === "like") {
       try {
-        const response = await fetch(`http://localhost:3001/like-img`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/like-img`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -112,7 +112,7 @@ const isFav = user && user.favourite.some(item => item.image === props.image && 
       }
     } else {
       try {
-        const response = await fetch(`http://localhost:3001/unlike-img`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/unlike-img`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -140,7 +140,7 @@ const isFav = user && user.favourite.some(item => item.image === props.image && 
     const imguser=user;
     if (fav === "add") {
       try {
-        const response = await fetch(`http://localhost:3001/add-fav`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/add-fav`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -163,7 +163,7 @@ const isFav = user && user.favourite.some(item => item.image === props.image && 
     }
     else{
       try {
-        const response = await fetch(`http://localhost:3001/remove-fav`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/remove-fav`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",

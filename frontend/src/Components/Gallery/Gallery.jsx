@@ -56,7 +56,7 @@ const Gallery = (props) => {
       try {
         const token = localStorage.getItem("auth-token");
         const image = img;
-        let response = await fetch(`http://localhost:3001/deleteimg`, {
+        let response = await fetch(`https://nature-gallery-z1us.onrender.com/deleteimg`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -80,7 +80,7 @@ const Gallery = (props) => {
     const imguser = user;
     if (like === "like") {
       try {
-        const response = await fetch(`http://localhost:3001/like-img`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/like-img`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -101,7 +101,7 @@ const Gallery = (props) => {
       }
     } else {
       try {
-        const response = await fetch(`http://localhost:3001/unlike-img`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/unlike-img`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -130,7 +130,7 @@ const Gallery = (props) => {
     const imguser = user;
     if (fav === "add") {
       try {
-        const response = await fetch(`http://localhost:3001/add-fav`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/add-fav`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",
@@ -151,7 +151,7 @@ const Gallery = (props) => {
       }
     } else {
       try {
-        const response = await fetch(`http://localhost:3001/remove-fav`, {
+        const response = await fetch(`https://nature-gallery-z1us.onrender.com/remove-fav`, {
           method: "POST",
           headers: {
             Accept: "application/form-data",

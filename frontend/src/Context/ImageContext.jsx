@@ -4,11 +4,11 @@ const ImageContextProvider=(props)=>{
     const[All_Images,setAll_Images]=useState([]);
     const[All_Users,setAll_Users]=useState([]);
     useEffect(()=>{
-         fetch(`http://localhost:3001/allimages`)
+         fetch(`https://nature-gallery-z1us.onrender.com/allimages`)
         .then((resp)=>resp.json())
         .then((data)=>setAll_Images(data));
 
-         fetch(`http://localhost:3001/allusers`)
+         fetch(`https://nature-gallery-z1us.onrender.com/allusers`)
         .then((resp)=>resp.json())
         .then((data)=>setAll_Users(data));
     },[]);

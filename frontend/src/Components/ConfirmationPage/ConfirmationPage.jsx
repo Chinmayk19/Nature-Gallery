@@ -38,7 +38,7 @@ const ConfirmationPage = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3001/send-verification-email`,
+        `https://nature-gallery-z1us.onrender.com/send-verification-email`,
         {
           method: "POST",
           headers: {
@@ -75,7 +75,7 @@ const ConfirmationPage = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/signup`, {
+      const response = await fetch(`https://nature-gallery-z1us.onrender.com/signup`, {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -105,7 +105,7 @@ const ConfirmationPage = () => {
 
   const handlelogin = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/login`, {
+      const response = await fetch(`https://nature-gallery-z1us.onrender.com/login`, {
         method: "POST",
         headers: {
           Accept: "application/form-data",

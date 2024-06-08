@@ -50,7 +50,7 @@ const Userupload = (props) => {
           }
         });
 
-        const addImageResponse = await fetch(`http://localhost:3001/addimage`, {
+        const addImageResponse = await fetch(`https://nature-gallery-z1us.onrender.com/addimage`, {
           method: "POST",
           headers: {
             Accept: "application/json",

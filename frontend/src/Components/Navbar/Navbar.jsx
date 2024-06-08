@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import "./Navbar.css";
 import naturelogo from "../Assests/naturelogo.png"
 import {Link, useNavigate} from "react-router-dom";
-import logo2 from "../Assests/login2.png"
 import { ImageContext } from "../../Context/ImageContext";
 
 const Navbar = () => {

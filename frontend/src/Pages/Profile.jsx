@@ -31,7 +31,7 @@ const Profile = () => { // Access history from props
       const username=user.username;  
       if(text==="Follow"){
         try {
-          const response=await fetch(`http://localhost:3001/follow`,{
+          const response=await fetch(`https://nature-gallery-z1us.onrender.com/follow`,{
           method:"POST",
           headers:{
             Accept: "application/form-data",
@@ -52,7 +52,7 @@ const Profile = () => { // Access history from props
         }
       }else{
         try {
-          const response=await fetch(`http://localhost:3001/unfollow`,{
+          const response=await fetch(`https://nature-gallery-z1us.onrender.com/unfollow`,{
           method:"POST",
           headers:{
             Accept: "application/form-data",
