@@ -186,9 +186,9 @@ const isFav = user && user.favourite.some(item => item.image === props.image && 
     }
   };
 
-  function viewImg(imageSrc){
-    window.open(imageSrc);
-  }
+  // function viewImg(imageSrc){
+  //   window.open(imageSrc);
+  // }
 
   return (
     <>
@@ -234,7 +234,7 @@ const isFav = user && user.favourite.some(item => item.image === props.image && 
           alt=""
           style={{ opacity: effect }}
           className="natureimg"
-          onClick={()=>{viewImg(props.image)}}
+          // onClick={()=>{viewImg(props.image)}}
         />
         <div className="name-downloadbtn">
           <Link to={isUser()?"My-Profile":`/profile/${props.user}`}>
