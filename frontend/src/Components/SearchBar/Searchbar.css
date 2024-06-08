@@ -1,0 +1,23 @@
+/* SearchBar.css */
+.search-bar {
+    display: flex;
+    margin: 25px;
+    justify-content: center;
+    gap: var(--space-2xs);
+  }
+  
+  .search {
+    padding: var(--space-3xs);
+    font-size: var(--step--1);
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .searchbtn {
+    padding: var(--space-3xs) var(--space-xs);
+    font-size: var(--step--1);
+    border: 1px solid #ccc;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  

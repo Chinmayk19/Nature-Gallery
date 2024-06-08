@@ -1,0 +1,39 @@
+
+:root{
+
+  /* steps */
+  --step--1: clamp(0.6000rem, 0.6500rem + 0.1932vi, 1rem);
+  --step-1: clamp(1.000rem, 1.1000rem + 0.4847vi, 1.5625rem);
+
+  /* 8px */
+  --space-3xs: clamp(0.4375rem, 0.4375rem + 0.0694vi, 0.5rem);
+  /* 10px */
+  --space-2xs: clamp(0.5625rem, 0.5625rem + 0.0694vi, 0.625rem); 
+  /* 12px */
+  --space-xs: clamp(0.6875rem, 0.6875rem + 0.0694vi, 0.75rem);
+  /* 16px */
+  --space-s: clamp(0.9375rem, 0.9375rem + 0.0694vi, 1rem);
+  /* 20px */
+  --space-m: clamp(1.125rem, 1.125rem + 0.1389vi, 1.25rem);
+  /* 30px */
+  --space-s-m: clamp(1.125rem, 1.125rem + 0.8333vi, 1.875rem);
+
+  /* 72px */
+  --space-l-xl: clamp(2.0000rem, 2.0000rem + 3.3333vi, 4.5rem);
+
+  /* 45px */
+  --space-m-l: clamp(1.6875rem, 1.6875rem + 1.25vi, 2.8125rem);
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+

@@ -1,0 +1,170 @@
+.Images {
+  position: relative;
+  height: 400px;
+  width: fit-content;
+  box-shadow: 1.5px 1px 2px 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.natureimg {
+  width: 300px;
+  height: 400px;
+}
+.name-downloadbtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0%;
+  left: 0%;
+  z-index: 1;
+}
+
+.name-downloadbtn h4 {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  font-size: 18px;
+  margin-left: 15px;
+  color: aliceblue;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.name-downloadbtn h4 span {
+  /* text-align: center; */
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(29, 99, 237);
+  /* border: 1px solid black; */
+  border-radius: 22px;
+  /* font-weight: 600; */
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  margin: 0%;
+}
+.name-downloadbtn a {
+  text-decoration: none;
+}
+.name-downloadbtn button {
+  padding: 8px 16px;
+  margin-right: 15px;
+  cursor: pointer;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  height: 40px;
+}
+.like-fav-section {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 15px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  padding-right: 10px;
+  top: 3%;
+  left: 0%;
+  z-index: 1;
+}
+.like-section {
+  display: flex;
+  width: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.like-section:hover {
+  cursor: auto;
+}
+.fav-section {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background-color: aliceblue;
+}
+.fav-section:hover {
+  cursor: auto;
+}
+.fav-section svg {
+  width: 28px;
+  height: 28px;
+}
+.like-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background-color: aliceblue;
+}
+.like-section svg {
+  width: 28px;
+  height: 28px;
+}
+@media screen and (max-width: 800px) and (min-width: 400px) {
+  .Images {
+    height: 350px;
+  }
+  .natureimg {
+    width: 250px;
+    height: 350px;
+  }
+  .name-downloadbtn h4 {
+    margin-left: 10px;
+    font-size: 16px;
+  }
+  .name-downloadbtn h4 span {
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+  }
+  .name-downloadbtn button{
+    margin-right: 10px;
+    padding: 6px 14px;
+  }
+}
+@media screen and (max-width: 400px) and (min-width: 0px) {
+  .Images {
+    height: 280px;
+  }
+  .natureimg {
+    width: 200px;
+    height: 280px;
+  }
+  .name-downloadbtn h4 {
+    margin-left: 5px;
+  }
+  .name-downloadbtn button {
+    margin-right: 6px;
+  }
+  .name-downloadbtn h4 {
+    margin-left: 5px;
+    font-size: 12px;
+  }
+  .name-downloadbtn h4 span {
+    font-size: 16px;
+    width: 25px;
+    height: 25px;
+  }
+  .name-downloadbtn button{
+    margin-right: 8px;
+    padding: 4px 10px;
+    height: 35px;
+  }
+  .fav-section,.like-section{
+    width: 25px;
+  height: 25px;
+  }
+  .fav-section svg,.like-section svg{
+    width: 20px;
+    height: 20px;
+  }
+}

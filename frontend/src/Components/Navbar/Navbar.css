@@ -1,0 +1,77 @@
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-2xs);
+  background-color: gainsboro; 
+  color: #fff;
+}
+
+.logo {
+  height: var(--space-m-l); 
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+.upload-button,
+.login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #4caf50; 
+  border: none;
+  color: white;
+  padding: var(--space-3xs) var(--space-s);
+  margin: 0 5px;
+  height: var(--space-s-m);
+  width: var(--space-l-xl);
+  border-radius: 4px;
+  font-size: var(--step--1);
+}
+.login-button{
+  margin-right: 10px;
+}
+.upload-button a {
+  text-decoration: none;
+  color: white;
+  
+}
+.login-button a {
+  text-decoration: none;
+  color: white;
+}
+
+.upload-button:hover,
+.login-button:hover {
+  background-color: #45a049;
+}
+.my-profile{
+  text-decoration: none;
+}
+.profile{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(29, 99, 237);
+  color: aliceblue;
+  border-radius: 22px;
+  font-weight: 600;
+  font-size: 19px;
+  width: 35px;
+  height: 35px;
+  margin: 0%;
+}
+@media screen and (max-width:500px) and (min-width:0px){
+  .profile{
+    font-size: 14px;
+    width: 25px;
+    height: 25px;
+  }
+}
