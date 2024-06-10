@@ -24,7 +24,7 @@ const Profile = () => { // Access history from props
    },[isFollowed])
 
     if (!user) {
-        return <div></div>; // Handle case where user is not found
+        return <div style={{textAlign:"center"}}>Loading...</div>; // Handle case where user is not found
     }
     const Follow=async()=>{
       const token=localStorage.getItem("auth-token");

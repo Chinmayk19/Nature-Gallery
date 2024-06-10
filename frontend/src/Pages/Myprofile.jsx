@@ -16,7 +16,7 @@ function Myprofile() {
   const user = All_Users.find((e) => e.token === token);
 
   if (!user || !user.userimg) {
-    return <div>Loading...</div>;
+    return <div style={{textAlign:"center"}}>Loading...</div>;
   }
 
   return (

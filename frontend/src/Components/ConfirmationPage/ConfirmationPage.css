@@ -41,7 +41,7 @@ button:hover {
 }
 @media screen and (max-width:400px) and (min-width:0px) {
     #confirm{
-        width: 250px;
+        width: 280px;
         padding: 10px;
         padding-top: 0%;
     }
