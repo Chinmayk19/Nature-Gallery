@@ -30,7 +30,7 @@ const Imagecontainer = () => {
               return <Imagebox key={e} id={e} image={item.image} likes={item.likes}  user={item.user}/>
             }
             else{
-              return null;
+              return <p>Loading....</p>;
             }
            })}
         </div>
