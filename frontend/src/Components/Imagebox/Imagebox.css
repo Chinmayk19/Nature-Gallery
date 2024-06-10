@@ -133,11 +133,11 @@
 }
 @media screen and (max-width: 400px) and (min-width: 0px) {
   .Images {
-    height: 280px;
+    height: 300px;
   }
   .natureimg {
-    width: 200px;
-    height: 280px;
+    width: 225px;
+    height: 300px;
   }
   .name-downloadbtn h4 {
     margin-left: 5px;

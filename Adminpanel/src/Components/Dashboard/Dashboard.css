@@ -1,0 +1,65 @@
+/* AddResultForm.css */
+
+.add-image {
+  max-width: 370px;
+  height: 390px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.addimage-itemfield {
+  margin-bottom: 20px;
+}
+
+.addimage-itemfield p {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.add-image-selector {
+  width: 100%;
+}
+
+.Upload-Image {
+  display: block;
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+.Upload-Image img{
+  width: 100px;
+  height: 130px;
+  border-radius: 10px;
+  object-fit: contain;
+  padding:  5px 20px;
+  border: 2px solid black;
+}
+.addimage-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.upload-img-container{
+    margin-bottom: 30px;
+}
+
+.addimage-btn:hover {
+  background-color: #0056b3;
+}
+.addimage-btn-container{
+    display: flex;
+    justify-content: center;
+}
