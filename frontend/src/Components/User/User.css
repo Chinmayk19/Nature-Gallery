@@ -1,0 +1,32 @@
+.Name-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+.Name-container:hover {
+    background-color: #e0e0e0;
+}
+.Name-container span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(29, 99, 237);
+  color: white;
+  border-radius: 22px;
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  margin: 0%;
+}
+.Name-container p {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProfileInfo.css";
+import { Link } from "react-router-dom";
 const ProfileInfo = (props) => {
   return (
     <div className="profile-info">
@@ -10,14 +11,14 @@ const ProfileInfo = (props) => {
         <p>{props.username}</p>
       </div>
       <div className="followers-following">
-        <div className="followers">
+        <Link to={"/Followers"} className="followers" >
           <p>{props.followers}</p>
           <p>Followers</p>
-        </div>
-        <div className="following">
+        </Link>
+        <Link to={"/Following"} className="following">
           <p>{props.following}</p>
           <p>Following</p>
-        </div>
+        </Link>
       </div>
     </div>
   );

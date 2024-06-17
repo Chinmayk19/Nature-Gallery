@@ -43,6 +43,8 @@
     padding: 5px;
     padding-bottom: 10px;
     align-items: center;
+    text-decoration: none;
+    color: black;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 .followers:hover,.following:hover{
@@ -98,6 +100,7 @@
     .followers,.following{
         gap:2px;
         padding-bottom: 5px;
+       
     }
     .followers p{
         font-size: 12px;
