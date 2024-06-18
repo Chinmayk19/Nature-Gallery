@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import "./CSS/Myprofile.css";
 import ProfileInfo from "../Components/ProfileInfo/ProfileInfo";
 import { ImageContext } from "../Context/ImageContext";
@@ -59,7 +60,7 @@ function Myprofile() {
       <hr className="hr" />
       <div>
         <div className="gallery-container-1">
-          {text === "" ? (
+          {text === "" ? (user.userimg.length>0 ? (
             user.userimg.map((e, index) => (
               <Gallery
                 key={index}
@@ -68,26 +69,24 @@ function Myprofile() {
                 text={text}
               />
             ))
-          ) : (
+          ):<div>You are yet to make a post. Make a <Link to={"/Upload"}>Post</Link></div>) : (
             <></>
           )}
         </div>
         <div className="gallery-container-1">
-          {text === "likedImages" ? (
-            user.likedimg.map((e, index) => (
+          {text === "likedImages" ?(user.likedimg.length>0?user.likedimg.map((e, index) => (
               <Gallery
                 key={index}
                 image={e.imagename}
                 user={e.Username}
                 text={text}
               />
-            ))
-          ) : (
+            )):<div>No liked Images</div>) : (
             <></>
           )}
         </div>
         <div className="gallery-container-1">
-          {text === "MyFavourites" ? (
+          {text === "MyFavourites" ? (user.favourite.length>0?(
             user.favourite.map((e, index) => (
               <Gallery
                 key={index}
@@ -96,7 +95,7 @@ function Myprofile() {
                 text={text}
               />
             ))
-          ) : (
+          ):<div>Add Images to Favourite? <Link to={"/"}>Add</Link></div>) : (
             <></>
           )}
         </div>
