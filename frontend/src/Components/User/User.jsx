@@ -1,9 +1,10 @@
 import React from 'react'
 import "./User.css"
+import { Link } from 'react-router-dom'
 
 const User = (props) => {
   return (
-    <div className='Name-container'><span>{props.name.charAt(0).toUpperCase()}</span><p>{props.name}</p></div>
+    <Link to={`/profile/${props.name}`} className='Name-container'><span>{props.name.charAt(0).toUpperCase()}</span><p>{props.name}</p></Link>
   )
 }
 
