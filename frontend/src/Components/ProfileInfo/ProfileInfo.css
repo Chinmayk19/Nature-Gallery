@@ -84,17 +84,17 @@
 }
 @media screen and (max-width:400px) and (min-width:0px) {
     .profile-photo{
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }   
     .profile-photo p{
-        font-size: 22px;
+        font-size: 25px;
     }
     .profile-name p{
-        font-size: 16px;
+        font-size: 18px;
     }
     .followers-following{
-        gap: 15px;
+        gap: 16px;
         margin-top: 10px;
     }
     .followers,.following{
