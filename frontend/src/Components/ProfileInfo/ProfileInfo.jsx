@@ -1,7 +1,9 @@
 import React from "react";
 import "./ProfileInfo.css";
-import { Link } from "react-router-dom";
+import { Link ,useLocation} from "react-router-dom";
 const ProfileInfo = (props) => {
+  const location=useLocation();
+
   return (
     <div className="profile-info">
       <div className="profile-photo">
@@ -11,7 +13,8 @@ const ProfileInfo = (props) => {
         <p>{props.username}</p>
       </div>
       <div className="followers-following">
-        <Link to={"/Followers"} className="followers" >
+        {location.pathname==="/My-Profile"?(<>
+          <Link to={"/Followers"} className="followers" >
           <p>{props.followers}</p>
           <p>Followers</p>
         </Link>
@@ -19,6 +22,14 @@ const ProfileInfo = (props) => {
           <p>{props.following}</p>
           <p>Following</p>
         </Link>
+        </>):(<><div to={"/Followers"} className="followers" >
+          <p>{props.followers}</p>
+          <p>Followers</p>
+        </div>
+        <div to={"/Following"} className="following">
+          <p>{props.following}</p>
+          <p>Following</p>
+        </div></>)}
       </div>
     </div>
   );
