@@ -11,11 +11,6 @@ const Imagecontainer = () => {
     const changedtext = event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1).toLowerCase();
     setText(changedtext);
   }
-
-  function Searchimg() {
-    console.log(text);
-  }
-
   const filteredImages = All_Images.filter(item => item.category.includes(text));
 
   return (
@@ -30,7 +25,6 @@ const Imagecontainer = () => {
           className='search' 
           required 
         />
-        <button onClick={Searchimg} className='searchbtn'>Search</button>
       </div>
       <div id="image-block">
         {filteredImages.length > 0 ? (
