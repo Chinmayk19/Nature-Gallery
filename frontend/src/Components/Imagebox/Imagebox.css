@@ -32,6 +32,7 @@
 }
 .name-downloadbtn h4 span {
   /* text-align: center; */
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgb(29, 99, 237);
