@@ -3,13 +3,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const multer = require("multer");
-const path = require("path");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-const { Console } = require("console");
 const bcrypt = require("bcrypt");
-const cloudinary=require("cloudinary");
 const { secret_key } = require("./Config");
 
 app.use(express.json());
@@ -21,9 +17,44 @@ process.on("unhandledRejection", (reason, promise) => {
 // Database connection with MongoDB
 mongoose.connect(
   "mongodb+srv://student1234:student1234567890@cluster0.tnajmkf.mongodb.net/onlinetutor"
-);
+).then(console.log("hi"));
+// console.log("hi");
 
+const UserDonatedBooks = mongoose.model("UserDonateBooks", {
+  name: {
+      type: String,
+      required: true
+  },
+  phone: {
+      type: Number,
+      required: true
+  },
+  email: {
+      type: String,
+      required: true
+  },
+  books: {
+      type: Array,
+      required: true
+  }
+});
 
+app.post("/userbooks", async (req, res) => {
+  try {
+      const { userDetails, books } = req.body;
+      const newDonation = new UserDonatedBooks({
+          name: userDetails.name,
+          phone: userDetails.phone,
+          email: userDetails.email,
+          books: books
+      });
+      await newDonation.save();
+      res.status(201).send({ message: "Donation recorded successfully!" });
+  } catch (error) {
+      console.error("Error saving donation:", error);
+      res.status(500).send({ message: "Error saving donation." });
+  }
+});
 // Schema for Users
 const Users = mongoose.model("Users", {
   username: {
@@ -67,10 +98,7 @@ const Users = mongoose.model("Users", {
     default: Date.now,
   },
 });
-
-
 // Schema for OTP
-
 const OTP = mongoose.model("Otp", {
   email: {
     type: String,
@@ -114,28 +142,29 @@ const Images = mongoose.model("Images", {
   },
 });
 
-// Image Storage Engine
-
-// const storage = multer.diskStorage({
-//   destination: "./Upload/images",
-//   filename: (req, file, cb) => {
-//     return cb(
-//       null,
-//       `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-//     );
-//   },
-// });
-
-// const upload = multer({ storage: storage });
-
-// app.use("/images", express.static("Upload/images"));
-// app.post("/Upload", upload.single("image"), (req, res) => {
-//   res.json({
-//     success: 1,
-//     image_url: `http://localhost:${port}/images/${req.file.filename}`,
-//   });
-// });
-
+const department=mongoose.model("Department",{
+  dep_id:{
+    type:Number,
+    required:true
+  },
+  dep_name:{
+    type:String,
+    required:true,
+  },
+  dep_location:{
+    type:String,
+    required:true,
+  }
+})
+// Endpoint to add department
+app.post("/department",async(req,res)=>{
+  const new_dep=new department({
+    dep_id:dep_id,
+    dep_name:dep_name,
+    dep_location:dep_location
+  })
+  await new_dep.save();
+})
 // Endpoint to add image
 app.post("/addimage", async (req, res) => {
   try {

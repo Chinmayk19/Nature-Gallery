@@ -1,261 +1,265 @@
-import React, { useContext, useEffect } from "react";
+// Imagebox.jsx
+import React, { useContext, useEffect, useMemo, useState, useRef } from "react";
 import "./Imagebox.css";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ImageContext } from "../../Context/ImageContext";
-import { CiHeart } from "react-icons/ci";
-import { CiStar } from "react-icons/ci";
+import { CiHeart, CiStar } from "react-icons/ci";
 import { IoMdHeart } from "react-icons/io";
 import { HiStar } from "react-icons/hi2";
-const Imagebox = (props) => {
+
+const Imagebox = ({ id, image, likes, user: imageOwner }) => {
   const { All_Users } = useContext(ImageContext);
   const token = localStorage.getItem("auth-token");
 
-  // let username=user.username;
-  // console.log(user.username);
+  // Memoize user lookups so they don't rerun unnecessarily
+  const currentUser = useMemo(
+    () => All_Users?.find((u) => u.token === token) || null,
+    [All_Users, token]
+  );
 
-  const [hide, setHide] = useState("none");
-  const [display, setDisplay] = useState("none");
-  const [likefavsection, setLikeFavSection] = useState("none");
+  const isUser = useMemo(() => {
+    if (!All_Users || !imageOwner) return false;
+    return !!All_Users.find(
+      (e) => e.token === token && e.username === imageOwner
+    );
+  }, [All_Users, token, imageOwner]);
+
+  const isLiked = useMemo(
+    () =>
+      currentUser &&
+      currentUser.likedimg?.some(
+        (item) => item.imagename === image && item.Username === imageOwner
+      ),
+    [currentUser, image, imageOwner]
+  );
+
+  const isFav = useMemo(
+    () =>
+      currentUser &&
+      currentUser.favourite?.some(
+        (item) => item.image === image && item.Username === imageOwner
+      ),
+    [currentUser, image, imageOwner]
+  );
+
+  // UI state
   const [like, setLike] = useState("like");
   const [fav, setFav] = useState("add");
-  const [effect, setEffect] = useState("1");
-  const user = All_Users.find((e) => e.token === token);
-  const isUser = () => {
-    if (!All_Users || !props.user) {
-      return false;
-    }
-    const userFound = All_Users.find((e) => e.token === token && e.username === props.user);
-    return !!userFound;
-  };
-  
-  
 
-const isLiked = user && user.likedimg.some(item => item.imagename === props.image && item.Username === props.user);
+  // Lazy load logic
+  const containerRef = useRef(null);
+  const [visible, setVisible] = useState(false);
 
-
-const isFav = user && user.favourite.some(item => item.image === props.image && item.Username === props.user);
   useEffect(() => {
-    if (isLiked) {
-      setLike("Liked");
-    } else {
-      setLike("like");
-    }
-    if(isFav){
-      setFav("Added");
-    }else{
-      setFav("add");
-    }
-  }, [isLiked,isFav]);
+    if (isLiked) setLike("Liked");
+    else setLike("like");
 
+    if (isFav) setFav("Added");
+    else setFav("add");
+  }, [isLiked, isFav]);
 
-
-  function Entermouse() {
-    setHide("block");
-    setDisplay("flex");
-    setLikeFavSection("flex");
-    setEffect("0.8");
-  }
-  function Mouseout() {
-    setHide("none");
-    setDisplay("none");
-    setLikeFavSection("none");
-    setEffect("1");
-  }
-  const DownloadImg = (imageSrc, imageName) => {
-    if (localStorage.getItem("auth-token")) {
-      try {
-        fetch(imageSrc)
-          .then((res) => res.blob())
-          .then((blob) => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = imageName;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-          });
-      } catch (error) {
-        console.error("Error during image download:", error);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(containerRef.current);
+        }
+      },
+      {
+        rootMargin: "100px",
+        threshold: 0.1,
       }
-    } else {
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const DownloadImg = async (imageSrc, imageName) => {
+    if (!localStorage.getItem("auth-token")) {
       alert("Please Login to download the Image");
       window.location.replace("/login");
+      return;
+    }
+    try {
+      const res = await fetch(imageSrc);
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = imageName;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Error during image download:", error);
     }
   };
-  const ImgLike = async (img,user) => {
-    let token = localStorage.getItem("auth-token");
-    const image = img;
-    const imguser=user;
-    if (like === "like") {
+
+  const ImgLike = async (img, userParam) => {
+    const token = localStorage.getItem("auth-token");
+    if (like.toLowerCase() === "like") {
       try {
-        const response = await fetch(`https://nature-gallery-z1us.onrender.com/like-img`, {
-          method: "POST",
-          headers: {
-            Accept: "application/form-data",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token, image,imguser }),
-        });
+        const response = await fetch(
+          `https://nature-gallery-z1us.onrender.com/like-img`,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/form-data",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token, image: img, imguser: userParam }),
+          }
+        );
         const data = await response.json();
         if (data.success) {
-          setLike("liked");
-          console.log(data.message);
+          setLike("Liked");
         } else {
           setLike("like");
-          console.log(data.error);
         }
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        const response = await fetch(`https://nature-gallery-z1us.onrender.com/unlike-img`, {
-          method: "POST",
-          headers: {
-            Accept: "application/form-data",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token, image,imguser }),
-        });
+        const response = await fetch(
+          `https://nature-gallery-z1us.onrender.com/unlike-img`,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/form-data",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token, image: img, imguser: userParam }),
+          }
+        );
         const data = await response.json();
         if (data.success) {
           setLike("like");
-          console.log(data.message);
         } else {
-          setLike("liked");
-          console.log(data.error);
+          setLike("Liked");
         }
       } catch (error) {
         console.log(error);
       }
     }
   };
-  const FavImg = async (img ,user) => {
-    console.log(setFav);
+
+  const FavImg = async (img, userParam) => {
     const token = localStorage.getItem("auth-token");
-    const image = img;
-    const imguser=user;
-    if (fav === "add") {
+    if (fav.toLowerCase() === "add") {
       try {
-        const response = await fetch(`https://nature-gallery-z1us.onrender.com/add-fav`, {
-          method: "POST",
-          headers: {
-            Accept: "application/form-data",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token, image ,imguser}),
-        });
-
+        const response = await fetch(
+          `https://nature-gallery-z1us.onrender.com/add-fav`,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/form-data",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token, image: img, imguser: userParam }),
+          }
+        );
         const data = await response.json();
-        if(data.success){
-          console.log(data.message);
-          setFav("added");
-        }
-        else{
+        if (data.success) {
+          setFav("Added");
+        } else {
           setFav("add");
         }
       } catch (error) {
         console.log(error);
       }
-    }
-    else{
+    } else {
       try {
-        const response = await fetch(`https://nature-gallery-z1us.onrender.com/remove-fav`, {
-          method: "POST",
-          headers: {
-            Accept: "application/form-data",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token, image ,imguser}),
-        });
-        
+        const response = await fetch(
+          `https://nature-gallery-z1us.onrender.com/remove-fav`,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/form-data",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token, image: img, imguser: userParam }),
+          }
+        );
         const data = await response.json();
-        if(data.success){
-          console.log(data.message);
+        if (data.success) {
           setFav("add");
-        }
-        else{
-          setFav("added");
+        } else {
+          setFav("Added");
         }
       } catch (error) {
         console.log(error);
       }
     }
   };
-
-  // function viewImg(imageSrc){
-  //   window.open(imageSrc);
-  // }
 
   return (
-    <>
-      <div
-        className="Images"
-        key={props.id}
-        onMouseEnter={() => {
-          Entermouse();
-        }}
-        onMouseLeave={() => {
-          Mouseout();
-        }}
-        // onClick={()=>{viewImg(props.image)}}
-      >
-        <div className="like-fav-section" style={{ display: likefavsection }}>
-          <div
-            className="fav-section"
-            onClick={() => {
-              FavImg(props.image,props.user);
-            }}
-          >
-            {fav === "add" ? (
-              <CiStar />
-            ) : (
-              <HiStar style={{ color: "goldenrod" }} />
-            )}
-          </div>
-          <div
-            className="like-section"
-            onClick={() => {
-              ImgLike(props.image,props.user);
-            }}
-          >
-            {like === "like" ? (
-              <CiHeart />
-            ) : (
-              <IoMdHeart style={{ color: "red" }} />
-            )}
-          </div>
+    <div
+      className="Images"
+      key={id}
+      ref={containerRef}
+      // hover effects like show/hide can be achieved in CSS with :hover to simplify
+    >
+      <div className="like-fav-section">
+        <div
+          className="fav-section"
+          onClick={() => {
+            FavImg(image, imageOwner);
+          }}
+        >
+          {fav.toLowerCase() === "add" ? (
+            <CiStar />
+          ) : (
+            <HiStar style={{ color: "goldenrod" }} />
+          )}
         </div>
-        <img
-          src={props.image}
-          alt=""
-          style={{ opacity: effect }}
-          className="natureimg"
-          // onClick={()=>{viewImg(props.image)}}
-        />
-        <div className="name-downloadbtn">
-          <Link to={isUser()?"My-Profile":`/profile/${props.user}`}>
-            <h4>
-              <span style={{ display: display }}>
-                {props.user.charAt(0).toUpperCase()}
-              </span>
-              {props.user}
-            </h4>
-          </Link>
-          <button
-            style={{ display: hide }}
-            onClick={() => {
-              DownloadImg(props.image, "Image");
-            }}
-          >
-            Download
-          </button>
+        <div
+          className="like-section"
+          onClick={() => {
+            ImgLike(image, imageOwner);
+          }}
+        >
+          {like.toLowerCase() === "like" ? (
+            <CiHeart />
+          ) : (
+            <IoMdHeart style={{ color: "red" }} />
+          )}
         </div>
       </div>
-    </>
+
+      {visible ? (
+        <img
+          src={image}
+          alt={`by ${imageOwner}`}
+          loading="lazy"
+          className="natureimg"
+        />
+      ) : (
+        <div className="placeholder" aria-label="image placeholder">
+          {/* optional skeleton / spinner */}
+        </div>
+      )}
+
+      <div className="name-downloadbtn">
+        <Link to={isUser ? "My-Profile" : `/profile/${imageOwner}`}>
+          <h4>
+            <span className="initial">
+              {imageOwner?.charAt(0).toUpperCase()}
+            </span>
+            {imageOwner}
+          </h4>
+        </Link>
+        <button
+          className="download-btn"
+          onClick={() => DownloadImg(image, "Image")}
+        >
+          Download
+        </button>
+      </div>
+    </div>
   );
 };
 

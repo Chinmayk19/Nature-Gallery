@@ -8,7 +8,6 @@ const ConfirmationPage = () => {
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
   const [state, setState] = useState("Signup");
-  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -19,6 +18,7 @@ const ConfirmationPage = () => {
 
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
   };
   const changeUserid = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,22 +53,17 @@ const ConfirmationPage = () => {
       const data = await response.json();
 
       if (data.success) {
-        setMessage(
-          "Verification email sent. Check your inbox and enter the code."
-        );
         alert(
           "Verification email sent. Check your inbox and enter the code within 60 seconds."
         );
         setLoading(false);
       } else {
         console.error("Error sending verification email:", data.errors);
-        setMessage(data.errors || "Error sending verification email.");
         alert(data.errors);
         setLoading(false);
       }
     } catch (error) {
       // console.error('Error sending verification email:', error);
-      setMessage("Error sending verification email.");
       setLoading(false);
     }
   };
@@ -94,12 +89,10 @@ const ConfirmationPage = () => {
         alert(data.message);
       } else {
         alert(data.message);
-        setMessage(data.errors || "Error during signup.");
         console.log(data.error);
       }
     } catch (error) {
       console.error("Error:", error);
-      setMessage("Error during signup.");
     }
   };
 

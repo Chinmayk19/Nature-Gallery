@@ -7,9 +7,11 @@ import ImageContextProvider from './Context/ImageContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ImageContextProvider>
-    <App />
-  </ImageContextProvider>
+  <React.StrictMode>
+    <ImageContextProvider>
+      <App />
+    </ImageContextProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
